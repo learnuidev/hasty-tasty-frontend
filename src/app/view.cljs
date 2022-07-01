@@ -2,4 +2,4 @@
 
 
 (defn app []
-  [:div "Welcome to my blog"])
+  [:div "Welcome to Hasty Tasty Restaurant"])

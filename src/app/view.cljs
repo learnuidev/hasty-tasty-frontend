@@ -2,4 +2,8 @@
 
 
 (defn app []
-  [:div "Welcome to Hasty Tasty Restaurant"])
+  [:div
+    [:h1 "Welcome to Hasty Tasty Restaurant"]
+    [:p "Todos -"]
+    [:ul
+     [:li "Add backend"]]])

@@ -1,4 +1,5 @@
 (ns app.pages.how)
 
 (defn how-page []
-  [:div "How it works"])
+  [:div.m-8
+   [:h1.header.text-3xl.font-bold "how does ema datshi work?"]])

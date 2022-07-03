@@ -18,8 +18,12 @@
 
 (defn navbar []
   [:nav.m-8.flex.justify-between.items-stretch.items-center
+   ; A/B testing
+   #_[:a {:href "/"} "ema"]
    [:a {:href "/"}
-    [:img.h-8 {:src "img/hot.png"}]]
+    [:img.h-8 {:src "img/pepper.png"}]]
+   #_[:a {:href "/"}
+      [:img.h-8 {:src "img/hot.png"}]]
    [:div.flex.grid-gap-2
     [:p.mx-4 {:class [(when (is-active? @routes-state :routes/how) "font-medium")]}
      [:a {:href "/how"} "how it works"]]

@@ -1,4 +1,5 @@
 (ns app.pages.login)
 
 (defn login-page []
-  [:div "Login Page"])
+  [:div.m-8
+   [:h1.header.text-3xl.font-bold "login"]])

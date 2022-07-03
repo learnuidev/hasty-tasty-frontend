@@ -5,7 +5,7 @@
  [:div.mx-8.my-16
   [:h1.uppercase.text-5xl "ema datshi"]
   [:div.my-8
-   [:h3.text-2xl.font-light "ema dashi allows you to order food from your "
+   [:h3.text-2xl.font-light "ema datshi allows you to order food online from your "
     [:strong.font-medium "favourte, local restaurant"]]]
   [:> Anchor {:title "Get Started"
               :href "/restaurants"

@@ -5,14 +5,14 @@
    [app.components.navbar :refer [navbar]]
    ["/components/Button" :refer [Button]]
    ["/react_query/index" :refer [QueryClientProvider]]
-   ["/react_query/student/student.queries" :refer [useFetchStudents]]))
+   ["/react_query/restaurant/restaurant.queries" :refer [useBrowseRestaurants]]))
 
 (comment
   @routes-state)
 
 ;;
 (defn splash-page []
-  (let [data (useFetchStudents)]
+  (let [data (useBrowseRestaurants)]
     [:div.m-8
      [:h1.uppercase.text-5xl "Learning is an adventure"]
      #_[:h1.uppercase.text-5xl "Where developers"

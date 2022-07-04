@@ -1,10 +1,9 @@
 (ns app.core
   "This namespace contains your application and is the entrypoint for 'yarn start'."
-  (:require [reagent.core :as r]
-            [reagent.dom :as rdom]
+  (:require [reagent.dom :as rdom]
             ;; aws
-            ["/aws/amplify" :as amplify]
-            [app.config-ex :as config]
+            ; ["/aws/amplify" :as amplify]
+            [app.amplify :as amp]
             [app.auth]
             ;; Layout
             [app.layout :refer [app]]
@@ -13,12 +12,9 @@
             ; [app.view :refer [main-view]]))
 
 ;; configure aws
-(comment
- (amplify/configure (clj->js config/env)))
+(amp/configure-user-pool!)
+(amp/configure-appsync!)
 
-;; whats inside env
-(comment
-  (identity config/env))
 
 (defn ^:dev/after-load render
   "Render the toplevel component for this app."

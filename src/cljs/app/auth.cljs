@@ -2,7 +2,8 @@
       :author "Vishal Gautam"}
   app.auth
   (:require [reagent.core :as r]
-            ["/aws/auth" :as auth]))
+            ["/aws/auth" :as auth]
+            ["aws-amplify" :refer [Auth]]))
 
 
 (defonce auth-state (r/atom nil))
@@ -11,15 +12,19 @@
 ;; Auth
 ;; 1. Sign Up
 (comment)
-(defn sign-up! [{:keys [username password email]}]
+(defn sign-up! [{:keys [username password email name]}]
   (-> (auth/signUp (clj->js {:username username
                              :password password
-                             :email email}))
+                             :email email
+                             :name name}))
       (.then #(js/console.log %))))
+
 (comment
-  (sign-up! {:username "vishal.gautam"
-             :password "Password1-"
-             :email "learnuidev@gmail.com"}))
+  (sign-up! {:username "learnuidev@gmail.com"
+             :password "f@g/A/3]]gwS@fk&"
+             :email "learnuidev@gmail.com"
+             :name "Vishal Gautam"}))
+
 
 
 ;; 2. Resend Code
@@ -29,7 +34,7 @@
       (.then #(js/console.log %))))
 
 (comment
-  (resend-code "vishal.gautam"))
+  (resend-code "learnuidev@gmail.com"))
 
 ;; 3. Confirm Signup
 (defn confirm-signup! [{:keys [username code]}]
@@ -39,7 +44,7 @@
 
 
 (comment
- (confirm-signup! {:username "vishal.gautam"
+ (confirm-signup! {:username "learnuidev@gmail.com"
                    :code "296605"}))
 
 ;; 4. Sign In
@@ -50,19 +55,25 @@
 
 (comment
   (:jwtToken @auth-state)
-  (sign-in! {:username "vishal.gautam"
-             :password "Password1-"}))
+  (sign-in! {:username "learnuidev@gmail.com"
+             :password "f@g/A/3]]gwS@fk&"}))
 
 ;;
-(defonce root-url "https://oqdnm8f3y6.execute-api.us-east-1.amazonaws.com/api/v1")
+;; Step 5: get current credentials
+(set! js/window -auth Auth)
 
-
-
+;; Step 4.5 - get auth user
 (comment
-  @auth-state
-  (js/fetch (str root-url "/authed/me"))
-  (js/fetch "/authed/students")
-  (-> (js/fetch (str root-url "/authed/students")
-                (clj->js {:headers {:Access-Control-Allow-Origin "*"
-                                    :Authorization (:jwtToken @auth-state)}}))
+  (-> (auth/getAuthUser)
       (.then #(js/console.log %))))
+
+;; 5 Signout
+(comment
+  (auth/signOut))
+
+;; check user again
+(comment
+  (-> (auth/getAuthUser)
+      (.then #(js/console.log %))
+      (.catch #(js/console.log "TODO"))))
+  ;; => nil

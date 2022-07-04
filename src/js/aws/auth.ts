@@ -1,12 +1,13 @@
 import { Auth } from 'aws-amplify';
 
-export async function signUp ({ username, password, email, phoneNumber }) {
+export async function signUp ({ username, password, email, name, phoneNumber }) {
     try {
         const { user } = await Auth.signUp({
             username,
             password,
             attributes: {
                 email, // optional
+                name,
                 phone_number: phoneNumber, // optional - E.164 number convention
                 // other custom attributes
             },
@@ -57,13 +58,17 @@ export async function resendCode (username) {
     }
 }
 
-async function signOut () {
+export async function signOut () {
     try {
         const resp = await Auth.signOut({ global: true });
         return resp;
     } catch (error) {
         console.log('error signing out: ', error);
     }
+}
+
+export async function getAuthUser() {
+  return await Auth.currentAuthenticatedUser()
 }
 
 const auth = {
